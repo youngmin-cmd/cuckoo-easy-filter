@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="easy 필터">
+    <title>easy 필터 - 바코드 스캔 & 사용 안내</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzY2N2VlYSIvPgo8cGF0aCBkPSJNNiA4SDI2VjEwSDZWOFpNNiAxMkgyNlYxNEg2VjEyWk02IDE2SDI2VjE4SDZWMTZaTTYgMjBIMjZWMjJINlYyMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" type="image/svg+xml">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-barcode"></i>
+                <h1>쿠쿠 easy 필터</h1>
+            </div>
+            <p class="subtitle">바코드를 스캔하고 필터 사용 모델을 알아보세요</p>
+            
+            <!-- PWA 설치 버튼 -->
+            <div id="installPrompt" class="install-prompt" style="display: none;">
+                <button id="installBtn" class="btn btn-install">
+                    <i class="fas fa-download"></i>
+                    앱으로 설치하기
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="scan-section">
+                <div class="camera-container">
+                    <video id="video" autoplay muted></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <div class="scan-overlay">
+                        <div class="scan-frame"></div>
+                        <div class="scan-line"></div>
+                    </div>
+                    <div class="camera-controls">
+                        <button id="startScan" class="btn btn-primary">
+                            <i class="fas fa-camera"></i>
+                            스캔 시작
+                        </button>
+                        <button id="stopScan" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-stop"></i>
+                            스캔 중지
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section" style="display: none;">
+                <div class="result-card">
+                    <div class="barcode-info">
+                        <h3>스캔 결과</h3>
+                        <div class="barcode-number">
+                            <span id="barcodeValue"></span>
+                            <button id="copyBarcode" class="btn-copy">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="usage-info">
+                        <h4>사용 안내</h4>
+                        <div id="usageDetails" class="usage-details">
+                            <!-- 사용 안내 내용이 여기에 표시됩니다 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-input-section">
+                <div class="input-card">
+                    <h3>바코드 번호 직접 입력</h3>
+                    <div class="input-group">
+                        <input type="text" id="manualBarcode" placeholder="바코드 번호를 입력하세요" maxlength="20">
+                        <button id="searchBarcode" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            검색
+                        </button>
+                        <button id="resetAll" class="btn btn-warning">
+                            <i class="fas fa-undo"></i>
+                            초기화
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-scans">
+                <h3>최근 스캔 기록</h3>
+                <div id="recentScansList" class="recent-list">
+                    <!-- 최근 스캔 기록이 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 easy 필터. 바코드 스캔 & 필터 모델안내 서비스 by YM
+        
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
